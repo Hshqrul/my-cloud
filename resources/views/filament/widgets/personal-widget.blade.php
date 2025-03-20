@@ -40,7 +40,7 @@
 
             {{-- hard coded route --}}
             <a
-                href="admin/my-profile"
+                href="admin/profile"
                 {{-- method="get" --}}
                 class="my-auto"
             >
