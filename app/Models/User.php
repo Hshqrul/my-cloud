@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use Filament\Panel;
+use Illuminate\Support\Facades\Storage;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements FilamentUser // MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, HasAvatar // MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasUuids, HasFactory, Notifiable;
@@ -25,6 +27,7 @@ class User extends Authenticatable implements FilamentUser // MustVerifyEmail
         'username',
         'email',
         'password',
+        'avatar_url',
     ];
 
     /**
@@ -54,5 +57,10 @@ class User extends Authenticatable implements FilamentUser // MustVerifyEmail
     {
         // return str_ends_with($this->email, '@aech.com') && $this->hasVerifiedEmail();
         return true;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null ;
     }
 }
