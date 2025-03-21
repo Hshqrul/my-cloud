@@ -10,6 +10,26 @@ use Illuminate\Validation\ValidationException;
 class CustomLogin extends Login
 {
     /**
+     * Initializes the login form with default credentials.
+     *
+     * This method overrides the parent mount method to pre-fill the form
+     * with a default username and password. This is typically used for 
+     * demonstration or testing purposes.
+     *
+     * @return void
+     */
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        $this->form->fill([
+            'login' => 'usermycloud',
+            'password' => 'user@example.com',
+        ]);
+    }
+
+    /**
      * @return array<int | string, string | Form>
      */
     protected function getForms(): array
