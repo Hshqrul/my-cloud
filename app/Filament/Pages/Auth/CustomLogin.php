@@ -24,7 +24,7 @@ class CustomLogin extends Login
         parent::mount();
 
         $this->form->fill([
-            'login' => 'usermycloud',
+            'login' => 'user@example.com',
             'password' => 'user@example.com',
         ]);
     }
