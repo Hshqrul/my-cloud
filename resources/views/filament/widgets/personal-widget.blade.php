@@ -28,7 +28,7 @@
 
                 <x-filament::button
                     color="gray"
-                    icon="heroicon-m-arrow-left-on-rectangle"
+                    icon="heroicon-c-arrow-right-start-on-rectangle"
                     icon-alias="panels::widgets.account.logout-button"
                     labeled-from="sm"
                     tag="button"
@@ -48,7 +48,7 @@
 
                 <x-filament::button
                     color="gray"
-                    icon="heroicon-m-user-circle"
+                    icon="heroicon-c-user-circle"
                     icon-alias="panels::widgets.account.logout-button"
                     labeled-from="sm"
                     tag="button"

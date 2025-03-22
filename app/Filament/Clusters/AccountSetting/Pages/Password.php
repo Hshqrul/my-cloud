@@ -89,16 +89,14 @@ class Password extends Page implements HasForms
                                 'regex:/[@$!%*#?&]/', // must contain at least one special character
                             ])
                             ->dehydrateStateUsing(fn(string $state): string => Hash::make($state))
-                            ->dehydrated(fn(?string $state): bool => filled($state))
                             ->revealable()
+                            ->same('new_password_confirmation')
                             ->required(),
                         TextInput::make('new_password_confirmation')
                             ->label(__('filament-breezy::default.fields.new_password_confirmation'))
                             ->columnSpanFull()
                             ->password()
-                            ->same('new_password')
-                            ->dehydrateStateUsing(fn(string $state): string => Hash::make($state))
-                            ->dehydrated(fn(?string $state): bool => filled($state))
+                            ->dehydrated(false)
                             ->revealable()
                             ->required(),
                     ])
@@ -108,35 +106,11 @@ class Password extends Page implements HasForms
             ->statePath('data');
     }
 
-    // public function update()
-    // {
-    //     try {
-    //         auth()->user()->update(
-    //             $this->form->getState()
-    //         );
-
-    //         Notification::make()
-    //             ->title('Password updated!')
-    //             ->success()
-    //             ->send();
-
-    //         Notification::make()
-    //             ->title('Password changed! (Notify to Super Admin)')
-    //             ->success()
-    //             ->sendToDatabase(auth()->user());
-    //     } catch (\Throwable $th) {
-    //         Notification::make()
-    //             ->title('Failed to update.')
-    //             ->danger()
-    //             ->send();
-    //     }
-    // }
-
     public function submit()
     {
         $data = collect($this->form->getState())->only('new_password')->all();
         auth()->user()->update([
-            'password' => Hash::make($data['new_password']),
+            'password' => $data['new_password'],
         ]);
         session()->forget('password_hash_' . Filament::getCurrentPanel()->getAuthGuard());
         Filament::auth()->login($this->getUser());
@@ -145,11 +119,5 @@ class Password extends Page implements HasForms
             ->success()
             ->title(__('filament-breezy::default.profile.password.notify'))
             ->send();
-
-        // $adm = User::where('email', 'like', '%@aech.com')->first();
-        // Notification::make()
-        //     ->title(auth()->user()->name.' Password changed! (Notify to Super Admin)')
-        //     ->success()
-        //     ->sendToDatabase($adm);
     }
 }

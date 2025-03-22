@@ -41,11 +41,9 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset(RequestPasswordReset::class)
             ->profile()
             ->userMenuItems([
-                'profile' => \Filament\Navigation\MenuItem::make()->url(fn (): string => Profile::getUrl())
-                // \Filament\Navigation\MenuItem::make()
-                // ->label('Account Settings')
-                // ->url(fn (): string => Profile::getUrl())
-                // ->icon('heroicon-o-cog-6-tooth'),
+                'profile' => \Filament\Navigation\MenuItem::make()->url(fn (): string => Profile::getUrl())->label(fn (): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
+                \Filament\Navigation\MenuItem::make()->label('Go to Website')->url(config('app.url'))->icon('heroicon-c-window'),
+                'logout' => \Filament\Navigation\MenuItem::make()->url(fn (): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])
             ->colors([
                 'primary' => EnumsColor::SLATE_700,
