@@ -5,13 +5,16 @@ namespace App\Models;
 use Filament\Panel;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Filament\Models\Contracts\HasAvatar;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Notifications\Notification;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,8 +22,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia // MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasRoles;
     use InteractsWithMedia;
-    use HasUuids, HasFactory, Notifiable;
+    use HasUuids;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -58,6 +64,19 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $user->assignRole('author');
+
+            $adm = User::where('email', 'like', '%@aech.com')->first();
+            Notification::make()
+                ->title('Hello, '.$user->name.' Has been Registered!')
+                ->success()
+                ->sendToDatabase($adm);
+        });
+    }
+
     public function getFilamentName(): string
     {
         return $this->username;
@@ -65,13 +84,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
 
     public function canAccessPanel(Panel $panel): bool
     {
-        // return str_ends_with($this->email, '@aech.com') && $this->hasVerifiedEmail();
         return true;
     }
 
     public function getFilamentAvatarUrl(): ?string
     {
-        // return $this->avatar_url ? Storage::url($this->avatar_url) : null ;
         return $this->getMedia('avatars')?->first()?->getUrl() ?? $this->getMedia('avatars')?->first()?->getUrl('thumb') ?? null;
     }
 
@@ -85,5 +102,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole(config('filament-shield.super_admin.name'));
     }
 }

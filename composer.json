@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "awcodes/light-switch": "^1.0",
+        "bezhansalleh/filament-shield": "^3.3",
         "filament/filament": "3.3",
         "filament/spatie-laravel-media-library-plugin": "^3.3",
         "jeffgreco13/filament-breezy": "^2.6",

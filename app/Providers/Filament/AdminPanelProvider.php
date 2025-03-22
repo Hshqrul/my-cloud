@@ -8,25 +8,24 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Storage;
+use Termwind\Enums\Color as EnumsColor;
 use App\Filament\Pages\Auth\CustomLogin;
 use Awcodes\LightSwitch\Enums\Alignment;
-use Illuminate\Validation\Rules\Password;
+use Filament\Navigation\NavigationGroup;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
-use Jeffgreco13\FilamentBreezy\BreezyCore;
 use App\Filament\Pages\Auth\CustomRegister;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Filament\Http\Middleware\AuthenticateSession;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Clusters\AccountSetting\Pages\Profile;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Filament\Pages\Auth\PasswordReset\RequestPasswordReset;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use App\Filament\Clusters\AccountSetting\Pages\Profile;
-use Termwind\Enums\Color as EnumsColor;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -38,17 +37,17 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(CustomLogin::class)
             ->registration(CustomRegister::class)
-            ->passwordReset(RequestPasswordReset::class)
+            // ->passwordReset(RequestPasswordReset::class)
             ->profile()
             ->userMenuItems([
-                'profile' => \Filament\Navigation\MenuItem::make()->url(fn (): string => Profile::getUrl())->label(fn (): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
+                'profile' => \Filament\Navigation\MenuItem::make()->url(fn(): string => Profile::getUrl())->label(fn(): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
                 \Filament\Navigation\MenuItem::make()->label('Go to Website')->url(config('app.url'))->icon('heroicon-c-window'),
-                'logout' => \Filament\Navigation\MenuItem::make()->url(fn (): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
+                'logout' => \Filament\Navigation\MenuItem::make()->url(fn(): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])
             ->colors([
-                'primary' => EnumsColor::SLATE_700,
+                'primary' => EnumsColor::SLATE_600,
             ])
-            ->darkModeBrandLogo(fn () => view('filament.logo'))
+            ->darkModeBrandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('3.5rem')
             ->sidebarCollapsibleOnDesktop()
             ->topNavigation()
@@ -59,6 +58,12 @@ class AdminPanelProvider extends PanelProvider
                 Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label(__('menu.nav_group.access'))
+                    ->icon('heroicon-o-user-group')
+                    ->collapsible(true),
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -83,19 +88,22 @@ class AdminPanelProvider extends PanelProvider
                         'auth.register',
                     ])
                     ->position(Alignment::TopCenter),
-                // BreezyCore::make()
-                //     ->myProfile(
-                //         shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
-                //         userMenuLabel: 'My Profile', // Customizes the 'account' link label in the panel User Menu (default = null)
-                //         shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
-                //         navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
-                //         hasAvatars: true, // Enables the avatar upload form component (default = false)
-                //         slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
-                //     )
-                //     ->passwordUpdateRules(
-                //         rules: [Password::default()->mixedCase()->uncompromised(3)], // you may pass an array of validation rules as well. (default = ['min:8'])
-                //         requiresCurrentPassword: true, // when false, the user can update their password without entering their current password. (default = true)
-                //     )
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 4,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
             ]);
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Contracts\HasForms;
 use App\Filament\Clusters\AccountSetting;
 use App\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 
 class Password extends Page implements HasForms
 {
+    use HasPageShield;
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-c-lock-closed';
