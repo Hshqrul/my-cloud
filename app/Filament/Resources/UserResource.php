@@ -34,6 +34,11 @@ class UserResource extends Resource
 
     // protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return User::where('email_verified_at', null)->count() > 0 ? User::where('email_verified_at', null)->count() : null;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -205,7 +210,7 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 // Impersonate::make(),

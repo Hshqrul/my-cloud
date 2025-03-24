@@ -3,7 +3,18 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel", 
+        "framework",
+        "filament",
+        "filamentphp"
+    ],
+    "authors": [
+        {
+            "name": "Hashaqirul Hakimi",
+            "email": "hashaqirul@gmail.com"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
