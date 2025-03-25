@@ -18,7 +18,7 @@ use Filament\Forms\Components\Split;
 
 class CustomRegister extends Register
 {
-    protected ?string $maxWidth = '5xl';
+    protected ?string $maxWidth = '6xl';
 
     public function form(Form $form): Form
     {
@@ -41,12 +41,14 @@ class CustomRegister extends Register
                     Wizard\Step::make('Profile')
                         ->icon('heroicon-o-user')
                         ->completedIcon('heroicon-c-user')
+                        ->description('Please provide your profile details.')
                         ->schema([
                             $this->getProfileFormComponent(),
                         ]),
                     Wizard\Step::make('Password')
                         ->icon('heroicon-o-lock-closed')
                         ->completedIcon('heroicon-c-lock-closed')
+                        ->description('Please provide your password.')
                         ->schema([
                             $this->getPasswordFormComponent(),
                             $this->getPasswordConfirmationFormComponent(),
