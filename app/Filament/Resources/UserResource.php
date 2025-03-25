@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rules\Password;
 use Filament\Forms\Components\Actions\Action;
@@ -180,8 +181,8 @@ class UserResource extends Resource
                     ->collection('avatars')
                     ->circular()
                     ->wrap(),
-                Tables\Columns\TextColumn::make('username')->label('Username')
-                    ->description(fn(Model $record) => $record->name)
+                Tables\Columns\TextColumn::make('name')->label('Name')
+                    ->description(fn(Model $record) => $record->username)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')->label('Role')
                     ->formatStateUsing(fn($state): string => Str::headline($state))
@@ -218,7 +219,7 @@ class UserResource extends Resource
                     Tables\Actions\ViewAction::make()->slideOver(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                ]),
+                ])->icon('heroicon-m-ellipsis-horizontal'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => \Filament\Navigation\MenuItem::make()->url(fn(): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])
             ->colors([
-                'primary' => EnumsColor::SLATE_600,
+                'primary' => EnumsColor::SLATE_700,
             ])
             ->darkModeBrandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('3.5rem')
