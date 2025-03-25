@@ -40,6 +40,12 @@ class UserResource extends Resource
         return User::where('email_verified_at', null)->count() > 0 ? User::where('email_verified_at', null)->count() : null;
     }
 
+    
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
