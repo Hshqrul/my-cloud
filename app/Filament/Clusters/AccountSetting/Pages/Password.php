@@ -64,8 +64,10 @@ class Password extends Page implements HasForms
     {
         return $form
             ->schema([
-                Section::make('Password')->icon('heroicon-s-lock-closed')
+                Section::make('Password')
                     ->label(__('Password'))
+                    ->description(__('You can change your password here.'))
+                    // ->icon('heroicon-s-lock-closed')
                     ->schema([
                         TextInput::make('current_password')
                             ->label(__('filament-breezy::default.password_confirm.current_password'))
@@ -75,6 +77,7 @@ class Password extends Page implements HasForms
                             ->dehydrateStateUsing(fn(string $state): string => Hash::make($state))
                             ->dehydrated(fn(?string $state): bool => filled($state))
                             ->revealable()
+                            ->helperText(__('You must confirm your current password to make changes.'))
                             ->required(),
                         TextInput::make('new_password')
                             ->label(__('filament-breezy::default.fields.new_password'))
@@ -93,6 +96,7 @@ class Password extends Page implements HasForms
                             ->dehydrateStateUsing(fn(string $state): string => Hash::make($state))
                             ->revealable()
                             ->same('new_password_confirmation')
+                            ->helperText(__('Passwords must be at least 12 characters.'))
                             ->required(),
                         TextInput::make('new_password_confirmation')
                             ->label(__('filament-breezy::default.fields.new_password_confirmation'))
@@ -100,6 +104,7 @@ class Password extends Page implements HasForms
                             ->password()
                             ->dehydrated(false)
                             ->revealable()
+                            ->helperText(__('Enter your new password again.'))
                             ->required(),
                     ])
             ])
