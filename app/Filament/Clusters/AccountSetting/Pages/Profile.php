@@ -94,19 +94,10 @@ class Profile extends Page implements HasForms
                             ->collection('avatars'),
                         Grid::make()->schema([
                             TextInput::make('username')
-                                ->label(__('Username'))
-                                ->required()
-                                ->validationMessages([
-                                    'unique' => 'The :attribute has already been registered. Please choose another one.',
-                                ])
-                                ->unique($this->getUserModel()),
+                                ->label(__('Username')),
                             TextInput::make('email')
                                 ->label('Email Address')
-                                ->email()
-                                ->validationMessages([
-                                    'unique' => 'The :attribute has already been registered.',
-                                ])
-                                ->unique($this->getUserModel()),
+                                ->email(),
                             Split::make([
                                 TextInput::make('name')
                                     ->label(__('Name'))
@@ -165,6 +156,7 @@ class Profile extends Page implements HasForms
                         ]),
                     ]),
             ])
+            ->operation('edit')
             ->statePath('data')
             ->model(auth()->user());
     }

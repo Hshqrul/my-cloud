@@ -75,6 +75,9 @@ class CustomRegister extends Register
         return TextInput::make('username')
             ->label(__('Username'))
             ->unique($this->getUserModel())
+            ->validationMessages([
+                'unique' => 'The :attribute has already been registered. Please choose another one.',
+            ])
             ->required()
             ->maxLength(255)
             ->autofocus();
