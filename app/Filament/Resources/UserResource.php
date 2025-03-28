@@ -188,7 +188,7 @@ class UserResource extends Resource
                                             ->required(),
                                     ])
                             ])
-                            ->hiddenOn('edit'),
+                            ->hiddenOn(['edit', 'view']),
                     ])
                     ->columnSpan([
                         'sm' => 1,
