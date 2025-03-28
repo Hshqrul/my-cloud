@@ -19,6 +19,11 @@ class ListUsers extends ListRecords
         ];
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return UserResource::getWidgets();
+    }
+
     public function getTabs(): array
     {
         $user = auth()->user();

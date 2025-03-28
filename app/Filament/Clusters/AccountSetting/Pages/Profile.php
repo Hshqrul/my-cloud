@@ -94,10 +94,12 @@ class Profile extends Page implements HasForms
                             ->collection('avatars'),
                         Grid::make()->schema([
                             TextInput::make('username')
-                                ->label(__('Username')),
+                                ->label(__('Username'))
+                                ->unique(ignoreRecord: true),
                             TextInput::make('email')
                                 ->label('Email Address')
-                                ->email(),
+                                ->email()
+                                ->unique(ignoreRecord: true),
                             Split::make([
                                 TextInput::make('name')
                                     ->label(__('Name'))

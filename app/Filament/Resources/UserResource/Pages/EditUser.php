@@ -82,7 +82,6 @@ class EditUser extends EditRecord
         return new HtmlString("
             <div class='flex items-center space-x-2'>
                 <div>$title </div>
-                $badge
             </div>
         ");
     }

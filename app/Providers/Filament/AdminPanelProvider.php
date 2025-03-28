@@ -49,6 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->darkModeBrandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('3.5rem')
+            ->font('Poppins')
             ->sidebarCollapsibleOnDesktop()
             ->topNavigation()
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
@@ -61,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label(__('menu.nav_group.access'))
-                    ->icon('heroicon-o-user-group')
+                    ->icon('heroicon-c-user-group')
                     ->collapsible(true),
             ])
             ->middleware([
