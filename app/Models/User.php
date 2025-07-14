@@ -66,18 +66,18 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
         ];
     }
 
-    protected static function booted(): void
-    {
-        static::created(function (User $user) {
-            $user->assignRole('author');
+    // protected static function booted(): void
+    // {
+    //     static::created(function (User $user) {
+    //         $user->assignRole('author');
 
-            $adm = User::where('email', 'like', '%@aech.com')->first();
-            Notification::make()
-                ->title('Hello, '.$user->name.' Has been Registered!')
-                ->success()
-                ->sendToDatabase($adm);
-        });
-    }
+    //         $adm = User::where('email', 'like', '%@aech.com')->first();
+    //         Notification::make()
+    //             ->title('Hello, '.$user->name.' Has been Registered!')
+    //             ->success()
+    //             ->sendToDatabase($adm);
+    //     });
+    // }
 
     public function getFilamentName(): string
     {
