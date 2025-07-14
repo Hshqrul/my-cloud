@@ -47,7 +47,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => EnumsColor::SLATE_700,
             ])
-            ->databaseNotifications()->databaseNotificationsPolling('30s')
+            // ->databaseNotifications()->databaseNotificationsPolling('30s')
             ->darkModeBrandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('3.5rem')
             ->font('Poppins')
