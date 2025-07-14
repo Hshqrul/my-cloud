@@ -1,11 +1,27 @@
 @import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
-
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Re-assign Flux's gray of choice... */
+@theme {
+    --color-accent: var(--color-slate-800);
+    --color-accent-content: var(--color-slate-800);
+    --color-accent-foreground: var(--color-zinc-200);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-zinc-200);
+        --color-accent-content: var(--color-zinc-200);
+        --color-accent-foreground: var(--color-slate-800);
+    }
 }

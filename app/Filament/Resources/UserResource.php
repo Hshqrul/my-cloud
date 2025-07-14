@@ -42,6 +42,8 @@ use App\Filament\Resources\UserResource\Widgets\UserOverview;
 use Filament\Actions\EditAction;
 use Filament\Support\Exceptions\Cancel;
 use Filament\Tables\Actions\EditAction as ActionsEditAction;
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\RestoreBulkAction;
 
 class UserResource extends Resource
 {
@@ -55,7 +57,6 @@ class UserResource extends Resource
     {
         return User::where('email_verified_at', null)->count() > 0 ? User::where('email_verified_at', null)->count() : null;
     }
-
 
     public static function getNavigationBadgeColor(): ?string
     {
@@ -200,6 +201,9 @@ class UserResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->columns([
                 SpatieMediaLibraryImageColumn::make('media')
                     ->label('Profile Photo')
@@ -273,6 +277,7 @@ class UserResource extends Resource
                                 ->color('gray'),
                         ])
                         ->modalCancelAction(true),
+                    Tables\Actions\RestoreAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])->icon('heroicon-m-ellipsis-horizontal'),

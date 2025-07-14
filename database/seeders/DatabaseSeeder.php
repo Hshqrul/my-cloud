@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,5 +40,8 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ]
         ]);
+
+        Artisan::call('shield:super-admin', ['--user' => $sid]);
+        Artisan::call('shield:generate --all --ignore-existing-policies --panel=admin');
     }
 }

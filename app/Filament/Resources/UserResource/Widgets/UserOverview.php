@@ -31,19 +31,19 @@ class UserOverview extends BaseWidget
         $percentageUnverified = $totalUsers > 0 ? round(($totalUnverifiedUsers / $totalUsers) * 100) : 0;
 
         return [
-            Stat::make('Total Users Verified', User::where('id', '!=', auth()->user()->id)->whereNotNull('email_verified_at')->count())
-                ->description($percentageVerified . '% from total users')
-                ->descriptionIcon('heroicon-c-check-badge')
-                ->descriptionColor('success')
-                ->chart(
-                    User::whereBetween('email_verified_at', [now()->subDays(7)->startOfDay(), now()->endOfDay()])
-                        ->selectRaw('DATE(email_verified_at) as date, COUNT(*) as count')
-                        ->groupBy('date')
-                        ->orderBy('date')
-                        ->pluck('count', 'date')
-                        ->toArray()
-                )
-                ->chartColor('info'),
+            // Stat::make('Total Users Verified', User::where('id', '!=', auth()->user()->id)->whereNotNull('email_verified_at')->count())
+            //     ->description($percentageVerified . '% from total users')
+            //     ->descriptionIcon('heroicon-c-check-badge')
+            //     ->descriptionColor('success')
+            //     ->chart(
+            //         User::whereBetween('email_verified_at', [now()->subDays(7)->startOfDay(), now()->endOfDay()])
+            //             ->selectRaw('DATE(email_verified_at) as date, COUNT(*) as count')
+            //             ->groupBy('date')
+            //             ->orderBy('date')
+            //             ->pluck('count', 'date')
+            //             ->toArray()
+            //     )
+            //     ->chartColor('info'),
             Stat::make('Recently Analytics', User::where('id', '!=', auth()->user()->id)->count())
                 ->descriptionIcon('heroicon-c-user-group')
                 ->description('Total Users')

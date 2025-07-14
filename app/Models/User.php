@@ -91,7 +91,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->getMedia('avatars')?->first()?->getUrl() ?? $this->getMedia('avatars')?->first()?->getUrl('thumb') ?? null;
+        // if ($this->isSuperAdmin()) {
+            return $this->getMedia('avatars')?->first()?->getUrl() ?? $this->getMedia('avatars')?->first()?->getUrl('thumb') ?? null;
+        // }
+
+        // return 'https://robohash.org/' . $this->username . '.png';
     }
 
     public function registerMediaConversions(Media|null $media = null): void
