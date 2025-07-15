@@ -25,8 +25,8 @@ class RespondUser extends Component
     protected function messages(): array
     {
         return [
-            'name.unique' => 'The name .',
-            'no_of_pax.required_if' => 'The number of pax is required.',
+            'name.unique' => 'The name has already been taken. Please enter a different name.',
+            'no_of_pax.required_if' => 'The number of guests is required.',
         ]; 
     }
 

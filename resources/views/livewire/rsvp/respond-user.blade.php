@@ -15,7 +15,7 @@
     {{-- Form --}}
     <form wire:submit="saveRsvp" class="flex flex-col gap-5">
         {{-- Name --}}
-        <flux:input wire:model="name" label="Full Name" type="text" required autofocus autocomplete="name"
+        <flux:input wire:model="name" label="Full Name" type="text" required autofocus autocomplete="name" placeholder="Your Name"
             class="w-full" />
 
         {{-- Attendance --}}
