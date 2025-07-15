@@ -8,15 +8,18 @@
 
     {{-- Title --}}
     <div class="text-center">
-        <flux:heading size="xl">{{ __('Répondez S\'il Vous Plaît') }}</flux:heading>
-        <flux:subheading>{{ __('Enter your name and your attendance') }}</flux:subheading>
+        {{-- <flux:heading size="xl">{{ __('Répondez S\'il Vous Plaît') }}</flux:heading> --}}
+        <div class="mb-5">
+            <flux:separator variant="sublte" />
+        </div>
+        <flux:subheading>{{ __('Please enter your name and let us know if you can attend') }}</flux:subheading>
     </div>
 
     {{-- Form --}}
     <form wire:submit="saveRsvp" class="flex flex-col gap-5">
         {{-- Name --}}
-        <flux:input wire:model="name" label="Full Name" type="text" required autofocus autocomplete="name" placeholder="Your Name"
-            class="w-full" />
+        <flux:input wire:model="name" label="Full Name" type="text" required autofocus autocomplete="name"
+            placeholder="Your Name" class="w-full" />
 
         {{-- Attendance --}}
         <flux:radio.group wire:model.live="attendence" variant="segmented" label="Will you attend?" class="w-full">

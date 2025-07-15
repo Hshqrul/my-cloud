@@ -52,7 +52,7 @@
         <div class="flex items-center gap-2">
             <div class="flex items-center gap-1">
                 <span>
-                    © 2025 <span class="font-semibold">{{ config('app.name', 'Laravel') }}</span>
+                    © {{ date('Y') }} <span class="font-semibold">{{ config('app.name', 'Laravel') }}</span>
                 </span>
             </div>
             <span> · </span>
