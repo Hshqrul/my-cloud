@@ -92,7 +92,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
     public function getFilamentAvatarUrl(): ?string
     {
         // if ($this->isSuperAdmin()) {
-            return $this->getMedia('avatars')?->first()?->getUrl() ?? $this->getMedia('avatars')?->first()?->getUrl('thumb') ?? null;
+        return $this->getMedia('avatars')?->first()?->getUrl() ?? $this->getMedia('avatars')?->first()?->getUrl('thumb') ?? null;
         // }
 
         // return 'https://robohash.org/' . $this->username . '.png';
@@ -113,5 +113,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
     public function isSuperAdmin(): bool
     {
         return $this->hasRole(config('filament-shield.super_admin.name'));
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('logo_light')->singleFile();
+        $this->addMediaCollection('logo_dark')->singleFile();
     }
 }
