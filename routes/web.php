@@ -11,10 +11,13 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/', Home::class)->name('home');
-Route::get('/about', About::class)->name('about');
+// Route::get('/', Home::class)->name('home');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+// Route::get('/about', About::class)->name('about');
 
-Route::get('/rsvp' , RespondUser::class)->name('rsvp');
-Route::get('/rsvp/thank-you/{guestName}' , RespondedPage::class)->name('tq_rsvp');
+Route::get('/rsvp', RespondUser::class)->name('rsvp');
+Route::get('/rsvp/thank-you/{guestName}', RespondedPage::class)->name('tq_rsvp');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

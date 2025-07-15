@@ -1,4 +1,4 @@
-<div class="isolate flex flex-col gap-6">
+<div class="isolate flex flex-col gap-4">
     {{-- Background --}}
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
@@ -13,7 +13,7 @@
     </div>
 
     {{-- Form --}}
-    <form wire:submit="saveRsvp" class="flex flex-col gap-6">
+    <form wire:submit="saveRsvp" class="flex flex-col gap-5">
         {{-- Name --}}
         <flux:input wire:model="name" label="Full Name" type="text" required autofocus autocomplete="name"
             class="w-full" />
@@ -26,8 +26,8 @@
 
         {{-- Pax (enabled only if attending) --}}
         <flux:radio.group wire:model="no_of_pax" label="Number of Guests" class="w-full">
-            <flux:radio value="1" :disabled="$attendence == false"  label="1" />
-            <flux:radio value="2" :disabled="$attendence == false"  label="2" />
+            <flux:radio value="1" :disabled="$attendence == false" label="1" />
+            <flux:radio value="2" :disabled="$attendence == false" label="2" />
         </flux:radio.group>
 
         {{-- Submit --}}
@@ -35,7 +35,7 @@
             <flux:button type="submit" variant="primary" class="w-full">
                 {{ __('Submit') }}
             </flux:button>
-            <x-action-message class="ml-3" on="rsvp-saved">
+            <x-action-message class="ml-3 text-sm text-gray-600 dark:text-gray-300" on="rsvp-saved">
                 {{ __('Saved.') }}
             </x-action-message>
         </div>
