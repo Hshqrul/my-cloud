@@ -25,6 +25,7 @@
         "jeffgreco13/filament-breezy": "^2.6",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "league/flysystem-aws-s3-v3": "3.0",
         "livewire/flux": "^2.1",
         "livewire/volt": "^1.7"
     },
