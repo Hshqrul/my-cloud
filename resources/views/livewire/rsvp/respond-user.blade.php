@@ -1,3 +1,4 @@
+@section('title', ' · Répondez S\'il Vous Plaît')
 <div class="isolate flex flex-col gap-4">
     {{-- Background --}}
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -8,7 +9,6 @@
 
     {{-- Title --}}
     <div class="text-center">
-        {{-- <flux:heading size="xl">{{ __('Répondez S\'il Vous Plaît') }}</flux:heading> --}}
         <div class="mb-5">
             <flux:separator variant="sublte" />
         </div>
