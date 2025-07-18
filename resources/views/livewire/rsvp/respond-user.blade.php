@@ -1,5 +1,5 @@
 @section('title', ' · Répondez S\'il Vous Plaît')
-<div class="isolate flex flex-col gap-4">
+<div class="isolate md:isolate-auto flex flex-col gap-4">
     {{-- Background --}}
     <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"

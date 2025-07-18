@@ -17,7 +17,7 @@ use Filament\Tables\Columns\Summarizers\Sum;
 
 class RsvpResource extends Resource
 {
-    protected static ?string $label = 'List RSVPs';
+    protected static ?string $label = 'List';
 
     protected static ?string $model = Rsvp::class;
 
@@ -84,5 +84,20 @@ class RsvpResource extends Resource
         return [
             'index' => Pages\ManageRsvps::route('/'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('menu.nav_group.rsvp_setup');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('attendence', true)->count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'success';
     }
 }

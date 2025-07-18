@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Exception;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -15,10 +16,14 @@ use Livewire\WithFileUploads;
 class SettingRsvp extends Page implements HasForms
 {
     use InteractsWithForms;
-    
+
     use WithFileUploads;
 
+    use HasPageShield;
+
     public ?array $data = [];
+
+    protected static ?string $navigationLabel = 'Setting';
 
     protected static ?string $navigationIcon = 'heroicon-c-cog';
 
@@ -31,6 +36,11 @@ class SettingRsvp extends Page implements HasForms
         return [
             // ...
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('menu.nav_group.rsvp_setup');
     }
 
     public function mount(): void

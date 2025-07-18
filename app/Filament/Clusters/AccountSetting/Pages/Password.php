@@ -22,7 +22,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 
 class Password extends Page implements HasForms
 {
-    use HasPageShield;
+    // use HasPageShield;
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-c-lock-closed';

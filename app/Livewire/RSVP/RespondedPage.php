@@ -5,10 +5,12 @@ namespace App\Livewire\RSVP;
 use App\Models\Rsvp;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 
-#[Layout('layouts.guest')]
+#[Layout('components.layouts.guest')]
 class RespondedPage extends Component
 {
+    #[Locked]
     public $guestName;
     public $rsvp;
 

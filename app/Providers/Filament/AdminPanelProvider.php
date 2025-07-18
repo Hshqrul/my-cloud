@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(CustomLogin::class)
             ->registration(CustomRegister::class)
-            // ->passwordReset(RequestPasswordReset::class)
+            ->passwordReset(RequestPasswordReset::class)
             ->profile()
             ->userMenuItems([
                 'profile' => \Filament\Navigation\MenuItem::make()->url(fn(): string => Profile::getUrl())->label(fn(): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
@@ -47,23 +47,27 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => EnumsColor::SLATE_700,
             ])
-            // ->databaseNotifications()->databaseNotificationsPolling('30s')
+            ->databaseNotifications() // ->databaseNotificationsPolling('30s')
             ->darkModeBrandLogo(fn() => view('filament.logo'))
             ->brandLogoHeight('3.5rem')
             ->font('Poppins')
-            ->sidebarCollapsibleOnDesktop()
+            // ->sidebarCollapsibleOnDesktop()
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
+            // ->pages([
+            //     Pages\Dashboard::class,
+            // ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label(__('menu.nav_group.rsvp_setup'))
+                    // ->icon('heroicon-c-user-group')
+                    ->collapsible(false),
+                NavigationGroup::make()
                     ->label(__('menu.nav_group.access'))
-                    ->icon('heroicon-c-user-group')
-                    ->collapsible(true),
+                    // ->icon('heroicon-c-user-group')
+                    ->collapsible(false),
             ])
             ->middleware([
                 EncryptCookies::class,

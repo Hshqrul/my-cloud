@@ -7,7 +7,7 @@ use Filament\Widgets\Widget;
 
 class PersonalWidget extends Widget
 {
-    use HasWidgetShield;
+    // use HasWidgetShield;
     
     protected int | string | array $columnSpan = 'full';
 

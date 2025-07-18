@@ -34,7 +34,7 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class Profile extends Page implements HasForms
 {
-    use HasPageShield;
+    // use HasPageShield;
     use InteractsWithForms, InteractsWithActions;
 
     protected static ?string $navigationIcon = 'heroicon-c-user-circle';
