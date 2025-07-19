@@ -10,6 +10,7 @@ class Rsvp extends Model
         'name',
         'attendence',
         'no_of_pax',
+        'notes',
     ];
 
     protected $casts = [
