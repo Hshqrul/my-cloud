@@ -10,7 +10,8 @@ use Livewire\Attributes\Layout;
 class RespondUser extends Component
 {
     public string $name = '';
-    public $attendence ;
+    public string $notes = '';
+    public $attendence;
     public ?int $no_of_pax = null;
 
     protected function rules(): array
@@ -19,6 +20,7 @@ class RespondUser extends Component
             'name' => ['required', 'string', 'max:255', 'unique:rsvps,name'],
             'attendence' => ['required', 'boolean'],
             'no_of_pax' => ['required_if:attendence,true'],
+            'notes' => ['required', 'string', 'max:255'],
         ];
     }
 
@@ -27,14 +29,17 @@ class RespondUser extends Component
         return [
             'name.unique' => 'The name has already been taken. Please enter a different name.',
             'no_of_pax.required_if' => 'The number of guests is required.',
-        ]; 
+            'notes.required' => 'Please enter a wish for bride & groom.',
+        ];
     }
 
     public function updatedAttendence()
     {
-        // Reset pax if not attending
         if ($this->attendence == false) {
             $this->no_of_pax = null;
+            $this->notes = 'Sorry I can\'t make it, but wishing you both ....';
+        } else {
+            $this->notes = '';
         }
     }
 
@@ -46,6 +51,7 @@ class RespondUser extends Component
             'name' => $this->name,
             'attendence' => $this->attendence,
             'no_of_pax' => $this->no_of_pax,
+            'notes' => $this->notes,
         ]);
 
         $this->reset();
