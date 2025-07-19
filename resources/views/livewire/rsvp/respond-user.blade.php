@@ -27,12 +27,8 @@
             <flux:radio value="2" :disabled="$attendence == false" label="2" />
         </flux:radio.group>
 
-        <flux:textarea
-            wire:model="notes"
-            label="Wish for bride & groom"
-            placeholder="Your wish for bride & groom"
-            class="w-full"
-        />
+        <flux:textarea wire:model="notes" label="Wish for bride & groom" placeholder="Your wish for bride & groom"
+            class="w-full" />
 
         <div class="flex items-center justify-end">
             <flux:button type="submit" variant="primary" class="w-full">
@@ -43,4 +39,9 @@
             </x-action-message>
         </div>
     </form>
+    <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
+        {{ __('Want to view all') }}
+        <flux:link :href="route('guest_list')" wire:navigate>{{ __('wishes') }}</flux:link>
+        {{ __('?') }}
+    </div>
 </div>

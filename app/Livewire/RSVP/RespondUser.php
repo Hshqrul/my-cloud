@@ -6,7 +6,7 @@ use App\Models\Rsvp;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
-#[Layout('components.layouts.guest')]
+#[Layout('components.layouts.app')]
 class RespondUser extends Component
 {
     public string $name = '';

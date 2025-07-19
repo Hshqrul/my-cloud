@@ -8,7 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 
-#[Layout('components.layouts.guest')]
+#[Layout('components.layouts.app')]
 class RespondedPage extends Component
 {
     #[Locked]
