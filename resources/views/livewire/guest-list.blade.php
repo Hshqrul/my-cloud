@@ -44,10 +44,16 @@
                 </flux:callout>
             </div>
         @empty
-            <div class="text-center">
-                <flux:text class="text-indigo-600 dark:text-indigo-100 text-lg">
-                    {{ __('No wishes yet') }}
-                </flux:text>
+            <div class="flex flex-col justify-between w-full">
+                <flux:callout icon="face-frown" icon-variant="outline" color="gray" inline>
+                    <flux:callout.heading>{{ __('No wishes yet') }}</flux:callout.heading>
+                    <flux:callout.text>{{ __('Waiting for our friends and family to send their wishes') }}
+                    </flux:callout.text>
+                    <x-slot name="actions" class="@md:h-full m-0!">
+                        <flux:button href="{{ route('rsvp') }}" icon:trailing="arrow-right">{{ __('Be the first') }}
+                        </flux:button>
+                    </x-slot>
+                </flux:callout>
             </div>
         @endforelse
     </div>
@@ -55,9 +61,8 @@
         <div class="mt-5 mb-5">
             <flux:separator variant="sublte" />
         </div>
-        {{-- <flux:text class="text-indigo-900 dark:text-indigo-100">
-            {{ __('We sincerely thank you for your company, gift and good wishes and for helping us make our wedding day an occasion we will always remember.') }}
+        <flux:text class="text-indigo-900 dark:text-indigo-100">
             {{ __('Wedding Nabilah & Hakim') }}
-        </flux:text> --}}
+        </flux:text>
     </div>
 </div>
