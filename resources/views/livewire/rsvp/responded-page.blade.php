@@ -96,7 +96,7 @@
                                             </p>
                                             <flux:icon variant="solid"
                                                 :icon="$item->attendence ? 'check-badge' : 'moon'"
-                                                :class="$item->attendence ? 'text-green-500 size-3' : 'text-amber-500 size-3'" />
+                                                :class="$item->attendence ? 'text-green-500 size-3' : 'text-zinc-500 size-3'" />
                                         </div>
                                         <p class="text-zinc-500 dark:text-zinc-100">
                                             {{ $item->created_at->diffForHumans() }}

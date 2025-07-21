@@ -40,8 +40,7 @@
         </div>
     </form>
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        {{ __('Already submitted? Let\'s see the guest book!') }}
-        <flux:link :href="route('guest_list')" wire:navigate>{{ __('here') }}</flux:link>
-        ...
+        {{ __('Already responded? View the guest book!') }}
+        <flux:link :href="route('guest_list')" wire:navigate>{{ __('here...') }}</flux:link>
     </div>
 </div>
