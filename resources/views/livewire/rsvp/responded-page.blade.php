@@ -73,34 +73,54 @@
         <flux:heading class="text-indigo-600 dark:text-indigo-100 mb-2" size="lg">
             {{ __('Recently wishes for bride & groom') }}</flux:heading>
         <div class="flex flex-col gap-4 overflow-y-auto max-h-[150px] pr-2">
-            @foreach ($rsvps as $item)
-                <div
-                    class="flex flex-col justify-between bg-white dark:bg-indigo-900 border border-indigo-200 dark:border-indigo-400 rounded-lg p-4 shadow-sm">
-                    <div class="text-indigo-600 dark:text-indigo-100 text-sm leading-relaxed">
-                        <svg class="w-5 h-5 mb-1 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M7.17 3.1C4.57 5.08 3 8.03 3 11v7a3 3 0 0 0 3 3h3v-7H7v-2c0-1.61.79-3.09 2.11-4.03l-1.94-1.87zm9 0C13.57 5.08 12 8.03 12 11v7a3 3 0 0 0 3 3h3v-7h-2v-2c0-1.61.79-3.09 2.11-4.03l-1.94-1.87z" />
-                        </svg>
-                        <p class="italic">"{{ $item->notes }}"</p>
-                    </div>
+            @forelse ($rsvps as $item)
+                <div class="flex flex-col justify-between ">
+                    <flux:callout :color="$item->attendence ? 'indigo' : 'amber'"
+                        class="text-indigo-600 dark:text-indigo-100 text-sm leading-relaxed">
+                        <flux:callout.text>
+                            <div class="flex flex-col space-y-3">
+                                <div>
+                                    <svg class="w-4 h-4 mb-2 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M7.17 3.1C4.57 5.08 3 8.03 3 11v7a3 3 0 0 0 3 3h3v-7H7v-2c0-1.61.79-3.09 2.11-4.03l-1.94-1.87zm9 0C13.57 5.08 12 8.03 12 11v7a3 3 0 0 0 3 3h3v-7h-2v-2c0-1.61.79-3.09 2.11-4.03l-1.94-1.87z" />
+                                    </svg>
+                                    <p class="italic">"{{ $item->notes }}"</p>
+                                </div>
 
-                    <div class="flex items-center mt-2">
-                        <div class="text-xs">
-                            <div class="flex items-center">
-                                <p class="font-semibold mr-1 text-indigo-800 dark:text-indigo-100">
-                                    {{ $item->name == $guestName ? 'You' : $item->name }}
-                                </p>
-                                <flux:icon variant="solid" :icon="$item->attendence ? 'check-badge' : 'moon'"
-                                    :class="$item->attendence ? 'text-green-500 size-3' : 'text-zinc-500 size-3'" />
+                                <div class="flex items-center mt-2">
+                                    <div class="text-xs space-y-1">
+                                        <div class="flex items-center">
+                                            <p
+                                                class="font-semibold mr-1 text-indigo-900 dark:text-indigo-100 text-sm hover:text-indigo-400">
+                                                {{ $item->name == $guestName ? 'You' : $item->name }}
+                                            </p>
+                                            <flux:icon variant="solid"
+                                                :icon="$item->attendence ? 'check-badge' : 'moon'"
+                                                :class="$item->attendence ? 'text-green-500 size-3' : 'text-amber-500 size-3'" />
+                                        </div>
+                                        <p class="text-zinc-500 dark:text-zinc-100">
+                                            {{ $item->created_at->diffForHumans() }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-indigo-500 dark:text-indigo-100">
-                                {{ $item->created_at->diffForHumans() }}
-                            </p>
-                        </div>
-                    </div>
+                        </flux:callout.text>
+                    </flux:callout>
                 </div>
-            @endforeach
+            @empty
+                <flux:callout icon="face-frown" icon-variant="outline" color="zinc" inline>
+                    <flux:callout.heading>{{ __('No wishes yet') }}</flux:callout.heading>
+                    <flux:callout.text>{{ __('Waiting for our friends and family to send their wishes') }}
+                    </flux:callout.text>
+                </flux:callout>
+            @endforelse
         </div>
-
+        @if (count($rsvps) > 0)
+            <div class="mt-4">
+                <flux:button href="{{ route('guest_list') }}" size="sm" variant="filled" class="w-full" wire:navigate>
+                    {{ __('Load more') }}
+                </flux:button>
+            </div>
+        @endif
     </div>
 </div>

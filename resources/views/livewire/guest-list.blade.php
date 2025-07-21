@@ -45,12 +45,12 @@
             </div>
         @empty
             <div class="flex flex-col justify-between w-full">
-                <flux:callout icon="face-frown" icon-variant="outline" color="gray" inline>
+                <flux:callout icon="face-frown" icon-variant="outline" color="zinc" inline>
                     <flux:callout.heading>{{ __('No wishes yet') }}</flux:callout.heading>
                     <flux:callout.text>{{ __('Waiting for our friends and family to send their wishes') }}
                     </flux:callout.text>
                     <x-slot name="actions" class="@md:h-full m-0!">
-                        <flux:button href="{{ route('rsvp') }}" icon:trailing="arrow-right">{{ __('Be the first') }}
+                        <flux:button href="{{ route('rsvp') }}" wire:navigate variant="ghost" icon:trailing="arrow-up-right">{{ __('Be the first') }}
                         </flux:button>
                     </x-slot>
                 </flux:callout>
