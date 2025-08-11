@@ -53,7 +53,7 @@
             {{ __('This domain is no longer accepting RSVPs. Please click the button below.') }}
         </flux:subheading>
         <div class="flex flex-row justify-center p-3">
-            <flux:button href="https://rsvp.laravel.cloud/event/nabilah-hakim" size="sm" variant="primary"
+            <flux:button href="https://sayyes.laravel.cloud/event/wedding-nabilah-hakim" size="sm" variant="primary"
                 class="w-full">
                 {{ __('New RSVP') }}
                 <flux:icon icon="arrow-up-right" class="size-4" />
