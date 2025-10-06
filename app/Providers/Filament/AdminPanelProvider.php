@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            // ->path('admin')
             ->login(CustomLogin::class)
             ->registration(CustomRegister::class)
             ->passwordReset(RequestPasswordReset::class)
@@ -45,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 'logout' => \Filament\Navigation\MenuItem::make()->url(fn(): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])
             ->colors([
-                'primary' => EnumsColor::SLATE_700,
+                'primary' => EnumsColor::ZINC_700,
             ])
             // ->databaseNotifications() // ->databaseNotificationsPolling('30s')
             ->darkModeBrandLogo(fn() => view('filament.logo'))
@@ -61,12 +61,13 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label(__('Finance'))
+                    ->collapsible(false),
+                NavigationGroup::make()
                     ->label(__('menu.nav_group.rsvp_setup'))
-                    // ->icon('heroicon-c-user-group')
                     ->collapsible(false),
                 NavigationGroup::make()
                     ->label(__('menu.nav_group.access'))
-                    // ->icon('heroicon-c-user-group')
                     ->collapsible(false),
             ])
             ->middleware([

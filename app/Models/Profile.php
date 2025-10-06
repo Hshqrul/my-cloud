@@ -22,6 +22,7 @@ class Profile extends Model
         'postcode',
         'state',
         'country',
+        'salary'
     ];
 
     public function user()

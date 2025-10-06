@@ -8,9 +8,9 @@ use App\Livewire\LandingPage\About;
 use App\Livewire\RSVP\RespondedPage;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 Route::get('/rsvp', RespondUser::class)->name('rsvp');
 Route::get('/rsvp/thank-you/{guestName}', RespondedPage::class)->name('tq_rsvp');

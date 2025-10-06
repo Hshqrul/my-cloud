@@ -110,6 +110,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia 
         return $this->hasOne(Profile::class);
     }
 
+    public function finance()
+    {
+        return $this->hasMany(Finance::class);
+    }
+
     public function isSuperAdmin(): bool
     {
         return $this->hasRole(config('filament-shield.super_admin.name'));
