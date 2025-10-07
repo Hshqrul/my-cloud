@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Clusters\AccountSetting;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -40,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->passwordReset(RequestPasswordReset::class)
             ->profile()
             ->userMenuItems([
-                'profile' => \Filament\Navigation\MenuItem::make()->url(fn(): string => Profile::getUrl())->label(fn(): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
+                'profile' => \Filament\Navigation\MenuItem::make()->url(fn(): string => AccountSetting::getUrl())->label(fn(): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
                 // \Filament\Navigation\MenuItem::make()->label('Go to Website')->url(config('app.url'))->icon('heroicon-c-window'),
                 'logout' => \Filament\Navigation\MenuItem::make()->url(fn(): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])

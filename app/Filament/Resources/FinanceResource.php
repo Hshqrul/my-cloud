@@ -47,10 +47,10 @@ class FinanceResource extends Resource
                         Forms\Components\TextInput::make('amount')
                             ->required()
                             ->prefix('RM ')
-                            ->numeric(),
+                            ->numeric()
+                            ->inputMode('decimal'),
                         Forms\Components\Select::make('type')
                             ->required()
-                            ->searchable()
                             ->native(false)
                             ->options(FinanceEnum::class),
                         Forms\Components\TextInput::make('user_id')

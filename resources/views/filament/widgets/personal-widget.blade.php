@@ -39,8 +39,9 @@
             </form>
 
             {{-- hard coded route --}}
+            {{-- admin/account-setting/profile --}}
             <a
-                href="admin/account-setting/profile"
+                href="account-setting/profile"
                 {{-- method="get" --}}
                 class="my-auto"
             >

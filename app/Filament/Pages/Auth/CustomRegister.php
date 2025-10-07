@@ -96,9 +96,9 @@ class CustomRegister extends Register
     {
         return Section::make()
             ->schema([
-                SpatieMediaLibraryFileUpload::make('user.avatar_url')->label('Avatar')
-                    ->collection('avatars')
-                    ->avatar(),
+                // SpatieMediaLibraryFileUpload::make('user.avatar_url')->label('Avatar')
+                //     ->collection('avatars')
+                //     ->avatar(),
                 Grid::make()
                     ->schema([
                         TextInput::make('profile.tel_no') // if want to include another table but has relation use (profile.user.username)
@@ -145,7 +145,7 @@ class CustomRegister extends Register
             $profileData['user_id'] = $createdUser->id;
             Profile::create($profileData);
         }
-        
+
         return $createdUser;
     }
 }
