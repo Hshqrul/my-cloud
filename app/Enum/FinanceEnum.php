@@ -11,6 +11,7 @@ enum FinanceEnum: string implements HasLabel, HasColor
     case DEBT = 'Debt';
     case LOAN = 'Loan';
     case INCOME = 'Income';
+    case EXPENSE = 'Expense';
 
     public function getColor(): string
     {
@@ -19,6 +20,7 @@ enum FinanceEnum: string implements HasLabel, HasColor
             self::DEBT => 'danger',
             self::LOAN => 'warning',
             self::INCOME => 'success',
+            self::EXPENSE => 'info',
         };
     }
 
@@ -29,6 +31,7 @@ enum FinanceEnum: string implements HasLabel, HasColor
             self::DEBT => 'Debt',
             self::LOAN => 'Loan',
             self::INCOME => 'Income',
+            self::EXPENSE => 'Expense',
         };
     }
 }

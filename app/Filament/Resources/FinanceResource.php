@@ -22,16 +22,17 @@ use Filament\Tables\Actions\HeaderActionsPosition;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\FinanceResource\RelationManagers;
 use App\Filament\Resources\FinanceResource\Widgets\FinanceStatsOverview;
+use Illuminate\Support\Facades\Auth;
 
 class FinanceResource extends Resource
 {
     protected static ?string $model = Finance::class;
 
-    protected static ?string $navigationLabel = 'List';
+    protected static ?string $navigationLabel = 'Lists';
 
     protected static ?string $navigationIcon = 'heroicon-s-wallet';
 
-    protected static ?string $navigationGroup = 'Finance';
+    protected static ?string $navigationGroup = 'Finance Menu';
 
     public static function form(Form $form): Form
     {
@@ -72,6 +73,7 @@ class FinanceResource extends Resource
             ->groups([
                 'type'
             ])
+            ->defaultSort('amount', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('item')
                     ->searchable()
@@ -142,6 +144,50 @@ class FinanceResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('user_id', auth()->user()->id);
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $user = Auth::user();
+        if (!$user) return null;
+
+        $salary = $user->profile?->salary ?? 0;
+        $monthlyExpenses = self::getEloquentQuery()
+            ->where('created_at', '>=', now()->startOfMonth())
+            ->sum('amount');
+
+        if ($salary == 0) return 'No Data';
+
+        $savingsRate = ($salary - $monthlyExpenses) / $salary * 100;
+
+        if ($savingsRate > 30) return 'Excellent';
+        if ($savingsRate > 20) return 'Good';
+        if ($savingsRate > 10) return 'Fair';
+        if ($savingsRate > 0) return 'Poor';
+
+        return 'Danger';
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        // $user = Auth::user();
+        // if (!$user) return null;
+
+        // $salary = $user->profile?->salary ?? 0;
+        // $monthlyExpenses = self::getEloquentQuery()
+        //     ->where('created_at', '>=', now()->startOfMonth())
+        //     ->sum('amount');
+
+        // if ($salary == 0) return 'gray';
+
+        // $savingsRate = ($salary - $monthlyExpenses) / $salary * 100;
+
+        // if ($savingsRate < 100 && $savingsRate > 75) return 'success';    // Excellent - Green
+        // if ($savingsRate < 75 && $savingsRate > 50) return 'info';    // Good - Green
+        // if ($savingsRate < 50 && $savingsRate > 25) return 'warning';    // Fair - Yellow
+        // if ($savingsRate < 25 && $savingsRate > 10) return 'danger';     // Poor - Yellow
+
+        return 'info';
     }
 }

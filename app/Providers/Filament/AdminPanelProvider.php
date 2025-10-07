@@ -41,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->userMenuItems([
                 'profile' => \Filament\Navigation\MenuItem::make()->url(fn(): string => Profile::getUrl())->label(fn(): string => auth()->user()->name)->icon('heroicon-c-user-circle'),
-                \Filament\Navigation\MenuItem::make()->label('Go to Website')->url(config('app.url'))->icon('heroicon-c-window'),
+                // \Filament\Navigation\MenuItem::make()->label('Go to Website')->url(config('app.url'))->icon('heroicon-c-window'),
                 'logout' => \Filament\Navigation\MenuItem::make()->url(fn(): string => filament()->getLogoutUrl())->icon('heroicon-c-arrow-right-start-on-rectangle')->color('danger'),
             ])
             ->colors([
@@ -61,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label(__('Finance'))
+                    ->label(__('Finance Menu'))
                     ->collapsible(false),
                 NavigationGroup::make()
                     ->label(__('menu.nav_group.rsvp_setup'))
